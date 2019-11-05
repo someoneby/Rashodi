@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+    </qresource>
+    <qresource prefix="/Pages">
+        <file>ChangePage.qml</file>
+        <file>AddPage.qml</file>
+    </qresource>
+    <qresource prefix="/Images">
+        <file>arrow.png</file>
+    </qresource>
+</RCC>
