@@ -77,17 +77,21 @@ Rectangle {
     }
 
     Button {
-        id: complete
+        signal addComplete (string sum)
+        objectName: "DataAdderButt"
         x: parent.width / 2 - 30
         y: comments.y + comments.height + 30
         font.pixelSize: 16
         text: "Добавить"
-        background: Rectangle {
-            color: "white"
-            radius: 8
-            border.color: "grey"
-            border.width: 0.5
-        }
+//        background: Rectangle {
+//            color: "white"
+//            radius: 8
+//            border.color: "grey"
+//            border.width: 0.5
+//        }
+//        onClicked: addComplete(sumEntry.data)
+        onClicked: addComplete("sumEntrydata")
+
     }
 
 }
