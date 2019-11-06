@@ -9,6 +9,10 @@ Window {
     height: 480
     title: qsTr("Расходы")
 
+    Connections {
+        target: dataAdder
+    }
+
     StackView {
         id: stackView
         initialItem: mainMenuPage

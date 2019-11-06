@@ -2,6 +2,7 @@
 #define DATAADDER_H
 
 #include <QtCore>
+#include <QObject>
 
 class DataAdder : public QObject {
     Q_OBJECT
@@ -10,7 +11,7 @@ class DataAdder : public QObject {
 
     public slots:
     int addComplete (const QString& sum){
-        qDebug() <<sum;
+        qDebug() <<"\n"<<sum;
     };
 };
 

@@ -24,23 +24,26 @@
 #include <QQmlApplicationEngine>
 #include <QQmlComponent>
 #include "src/dataadder.h"
+#include <QQmlContext>
+
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
+    QQmlContext *context = engine.rootContext();
 
-    QQmlComponent comp(&engine, QUrl("qrc:/main.qml"));
     DataAdder dataAdder;
-    QObject* pobj = comp.create();
+    context->setContextProperty("dataAdder", &dataAdder);
 
-    QObject* dataAdderObj = pobj->findChild<QObject*>("DataAdderButt");
-    if(dataAdderObj){
-        QObject::connect(
-            dataAdderObj, SIGNAL(addComplete(QString)),
-                    &dataAdder, SLOT(slotInfo(QString))
-        );
-    }
+    const QUrl url(QStringLiteral("qrc:/main.qml"));
+
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
+                     &app, [url](QObject *obj, const QUrl &objUrl){
+        if(!obj && url == objUrl)
+            QCoreApplication::exit(-1);
+    }, Qt::QueuedConnection);
+    engine.load(url);
 
     return app.exec();
 }
